@@ -1,0 +1,21 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  sys_win.c
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(76,2): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(163,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(164,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(165,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(234,7): warning C4996: 'GetVersionExA': was declared deprecated
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(277,47): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(283,42): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(298,37): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(312,39): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(321,36): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(359,47): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(362,29): warning C4267: 'function': conversion from 'size_t' to 'DWORD', possible loss of data
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(362,45): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(365,53): warning C4057: 'function': 'LPDWORD' differs in indirection to slightly different base types from 'int *'
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(415,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(542,66): warning C4152: nonstandard extension, function/data pointer conversion in expression
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(659,3): warning C4996: '_controlfp': This function or variable may be unsafe. Consider using _controlfp_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\win32\sys_win.c(598,88): warning C4100: 'nCmdShow': unreferenced formal parameter
+  quake2.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Quake II RTX\mod\quake2.exe

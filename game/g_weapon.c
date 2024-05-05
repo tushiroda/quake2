@@ -287,12 +287,62 @@ fire_shotgun
 Shoots shotgun pellets.  Used by shotgun and super shotgun.
 =================
 */
-void fire_shotgun (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int count, int mod)
+void fire_shotgun(edict_t* self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int count, int mod)
 {
 	int		i;
+	vec3_t		base;
+	vec3_t		forward, right, up;
 
-	for (i = 0; i < count; i++)
-		fire_lead (self, start, aimdir, damage, kick, TE_SHOTGUN, hspread, vspread, mod);
+	if (self->client) {
+		AngleVectors(self->client->v_angle, forward, right, up);
+
+		VectorScale(forward, -2, self->client->kick_origin);
+		self->client->kick_angles[0] = -2;
+		base[0] = start[0];
+		base[1] = start[1];
+		base[2] = start[2];
+
+		//eva 8 shotgun spread
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+		start[0] = base[0] + right[0] * 12;
+		start[1] = base[1] + right[1] * 12;
+		start[2] = base[2] + right[2] * 12;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+		start[0] = base[0] - right[0] * 12;
+		start[1] = base[1] - right[1] * 12;
+		start[2] = base[2] - right[2] * 12;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+
+		start[0] = base[0] + right[0] * 15 + up[0] * 15;
+		start[1] = base[1] + right[1] * 15 + up[1] * 15;
+		start[2] = base[2] + right[2] * 15 + up[2] * 15;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+		start[0] = base[0] - right[0] * 15 + up[0] * 15;
+		start[1] = base[1] - right[1] * 15 + up[1] * 15;
+		start[2] = base[2] - right[2] * 15 + up[2] * 15;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+		start[0] = base[0] + right[0] * 15 - up[0] * 15;
+		start[1] = base[1] + right[1] * 15 - up[1] * 15;
+		start[2] = base[2] + right[2] * 15 - up[2] * 15;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+		start[0] = base[0] - right[0] * 15 - up[0] * 15;
+		start[1] = base[1] - right[1] * 15 - up[1] * 15;
+		start[2] = base[2] - right[2] * 15 - up[2] * 15;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+
+		start[0] = base[0] + up[0] * 20;
+		start[1] = base[1] + up[1] * 20;
+		start[2] = base[2] + up[2] * 20;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+		start[0] = base[0] - up[0] * 20;
+		start[1] = base[1] - up[1] * 20;
+		start[2] = base[2] - up[2] * 20;
+		fire_lead(self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+	}
+	else {
+		for (i = 0; i < count; i++)
+			fire_lead (self, start, aimdir, damage, kick, TE_SHOTGUN, 0, 0, mod);
+	}
 }
 
 

@@ -557,7 +557,7 @@ void weapon_grenade_fire (edict_t *ent, qboolean held)
 	if (is_quad)
 		damage *= 4;
 
-	VectorSet(offset, 8, 8, ent->viewheight-8);
+	VectorSet(offset, 0, 0, ent->viewheight);
 	AngleVectors (ent->client->v_angle, forward, right, NULL);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
@@ -718,7 +718,7 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 	if (is_quad)
 		damage *= 4;
 
-	VectorSet(offset, 8, 8, ent->viewheight-8);
+	VectorSet(offset, 0, 0, ent->viewheight);
 	AngleVectors (ent->client->v_angle, forward, right, NULL);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
@@ -778,7 +778,7 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	VectorSet(offset, 8, 8, ent->viewheight-8);
+	VectorSet(offset, 0, 0, ent->viewheight);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 	fire_rocket (ent, start, forward, damage, 650, damage_radius, radius_damage);
 
@@ -822,14 +822,16 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	if (is_quad)
 		damage *= 4;
 	AngleVectors (ent->client->v_angle, forward, right, NULL);
-	VectorSet(offset, 24, 8, ent->viewheight-8);
+	VectorSet(offset, 0, 0, ent->viewheight);
 	VectorAdd (offset, g_offset, offset);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_blaster (ent, start, forward, damage, 1000, effect, hyper);
+	fire_blaster(ent, start, forward, 150, 1000, effect, hyper);
+	fire_blaster(ent, start, forward, 150, 1500, effect, hyper);
+	fire_blaster(ent, start, forward, 150, 2000, effect, hyper);
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
@@ -891,6 +893,7 @@ void Weapon_HyperBlaster_Fire (edict_t *ent)
 		}
 		else
 		{
+			//whatever
 			rotation = (ent->client->ps.gunframe - 5) * 2*M_PI/6;
 			offset[0] = -4 * sin(rotation);
 			offset[1] = 0;
@@ -906,7 +909,7 @@ void Weapon_HyperBlaster_Fire (edict_t *ent)
 				damage = 20;
 			Blaster_Fire (ent, offset, damage, true, effect);
 			if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-				ent->client->pers.inventory[ent->client->ammo_index]--;
+				ent->client->pers.inventory[ent->client->ammo_index];
 
 			ent->client->anim_priority = ANIM_ATTACK;
 			if (ent->client->ps.pmove.pm_flags & PMF_DUCKED)
@@ -1009,9 +1012,9 @@ void Machinegun_Fire (edict_t *ent)
 	// get start / end positions
 	VectorAdd (ent->client->v_angle, ent->client->kick_angles, angles);
 	AngleVectors (angles, forward, right, NULL);
-	VectorSet(offset, 0, 8, ent->viewheight-8);
+	VectorSet(offset, 0, 0, ent->viewheight);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
-	fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_MACHINEGUN);
+	fire_bullet (ent, start, forward, damage, 0, 0, 0, MOD_MACHINEGUN);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -1145,7 +1148,7 @@ void Chaingun_Fire (edict_t *ent)
 		AngleVectors (ent->client->v_angle, forward, right, up);
 		r = 7 + crandom()*4;
 		u = crandom()*4;
-		VectorSet(offset, 0, r, u + ent->viewheight-8);
+		VectorSet(offset, 0, 0, ent->viewheight);
 		P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
 		fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_CHAINGUN);
@@ -1187,7 +1190,7 @@ void weapon_shotgun_fire (edict_t *ent)
 	vec3_t		forward, right;
 	vec3_t		offset;
 	int			damage = 4;
-	int			kick = 8;
+	int			kick = 0;
 
 	if (ent->client->ps.gunframe == 9)
 	{
@@ -1200,7 +1203,7 @@ void weapon_shotgun_fire (edict_t *ent)
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -2;
 
-	VectorSet(offset, 0, 8,  ent->viewheight-8);
+	VectorSet(offset, 0, 0,  ent->viewheight+2);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
 	if (is_quad)
@@ -1224,7 +1227,7 @@ void weapon_shotgun_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+		ent->client->pers.inventory[ent->client->ammo_index];
 }
 
 void Weapon_Shotgun (edict_t *ent)
@@ -1250,7 +1253,7 @@ void weapon_supershotgun_fire (edict_t *ent)
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -2;
 
-	VectorSet(offset, 0, 8,  ent->viewheight-8);
+	VectorSet(offset, 0, 0,  ent->viewheight);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
 	if (is_quad)
@@ -1278,7 +1281,7 @@ void weapon_supershotgun_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index] -= 2;
+		ent->client->pers.inventory[ent->client->ammo_index];
 }
 
 void Weapon_SuperShotgun (edict_t *ent)
@@ -1329,7 +1332,7 @@ void weapon_railgun_fire (edict_t *ent)
 	VectorScale (forward, -3, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -3;
 
-	VectorSet(offset, 0, 7,  ent->viewheight-8);
+	VectorSet(offset, 0, 0,  ent->viewheight);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 	fire_rail (ent, start, forward, damage, kick);
 
@@ -1343,7 +1346,7 @@ void weapon_railgun_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index]--;
+		ent->client->pers.inventory[ent->client->ammo_index];
 }
 
 
@@ -1410,7 +1413,7 @@ void weapon_bfg_fire (edict_t *ent)
 	ent->client->v_dmg_roll = crandom()*8;
 	ent->client->v_dmg_time = level.time + DAMAGE_TIME;
 
-	VectorSet(offset, 8, 8, ent->viewheight-8);
+	VectorSet(offset, 0, 0, ent->viewheight);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 	fire_bfg (ent, start, forward, damage, 400, damage_radius);
 
@@ -1419,7 +1422,7 @@ void weapon_bfg_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index] -= 50;
+		ent->client->pers.inventory[ent->client->ammo_index];
 }
 
 void Weapon_BFG (edict_t *ent)
