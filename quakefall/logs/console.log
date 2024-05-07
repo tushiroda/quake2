@@ -1,49 +1,43 @@
-[2024-05-07 19:09] Logging console to logs/console.log
-[2024-05-07 19:09] Execing default.cfg
-[2024-05-07 19:09] Execing q2rtx.cfg
-[2024-05-07 19:09] Execing q2config.cfg
-[2024-05-07 19:09] 
-[2024-05-07 19:09] Engine version: q2rtx 1.7.0-r1.7-e6e582a5, built on Apr 14 2023
-[2024-05-07 19:09] 
-[2024-05-07 19:09] ------- R_Init -------
-[2024-05-07 19:09] Detected OpenGL 4.6 (compatibility profile)
-[2024-05-07 19:09] Loaded extension GL_ARB_fragment_program
-[2024-05-07 19:09] Loaded extension GL_EXT_compiled_vertex_array
-[2024-05-07 19:09] Using GLSL rendering backend.
-[2024-05-07 19:09] ----------------------
-[2024-05-07 19:09] ------- S_Init -------
-[2024-05-07 19:09] OpenAL initialized.
-[2024-05-07 19:09] No Ogg Vorbis music tracks have been found, so there will be no music.
-[2024-05-07 19:09] ----------------------
-[2024-05-07 19:09] SDL mouse initialized.
-[2024-05-07 19:09] Loaded game library from C:\Program Files (x86)\Steam\steamapps\common\Quake II RTX\quakefall\gamex86_64.dll
-[2024-05-07 19:09] ==== InitGame ====
-[2024-05-07 19:09] ------- Server Initialization -------
-[2024-05-07 19:09] SpawnServer: quakefall
-[2024-05-07 19:09] 0 entities inhibited
-[2024-05-07 19:09] 0 teams with 0 entities
-[2024-05-07 19:09] -------------------------------------
-[2024-05-07 19:09] ====== Quake II RTX initialized ======
-[2024-05-07 19:09] 
-[2024-05-07 19:09] Requesting connection... 1
-[2024-05-07 19:09] Player-4856 connected
-[2024-05-07 19:09] Connected to loopback (protocol 36).
-[2024-05-07 19:09] Triggering monsters
-[2024-05-07 19:09] Player-4856 entered the game
-[2024-05-07 19:09] Welcome to Quakefall! Take your time
-[2024-05-07 19:09] reading these help messages. Enemies won't spawn until you
-[2024-05-07 19:09] leave this room.
-[2024-05-07 19:09] New guns have been added! The Wingman, Eva 8,
-[2024-05-07 19:09] R99, SMR, and Charge Rifle are the additions. Go pick
-[2024-05-07 19:09] them up in the next room!
-[2024-05-07 19:10] Welcome to Quakefall! Take your time
-[2024-05-07 19:10] reading these help messages. Enemies won't spawn until you
-[2024-05-07 19:10] leave this room.
-[2024-05-07 19:10] Enemies spawn in waves. Kill them, and they might drop
-[2024-05-07 19:10] special upgrades for your guns!
-[2024-05-07 19:10] New guns have been added! The Wingman, Eva 8,
-[2024-05-07 19:10] R99, SMR, and Charge Rifle are the additions. Go pick
-[2024-05-07 19:10] them up in the next room!
-[2024-05-07 19:10] ==== ShutdownGame ====
-[2024-05-07 19:10] Shutting down OpenAL.
-[2024-05-07 19:10] Closing console log.
+[2024-05-07 19:34] Logging console to logs/console.log
+[2024-05-07 19:34] Execing default.cfg
+[2024-05-07 19:34] Execing q2rtx.cfg
+[2024-05-07 19:34] Execing q2config.cfg
+[2024-05-07 19:34] 
+[2024-05-07 19:34] Engine version: q2rtx 1.7.0-r1.7-e6e582a5, built on Apr 14 2023
+[2024-05-07 19:34] 
+[2024-05-07 19:34] ------- R_Init -------
+[2024-05-07 19:34] Detected OpenGL 4.6 (compatibility profile)
+[2024-05-07 19:34] Loaded extension GL_ARB_fragment_program
+[2024-05-07 19:34] Loaded extension GL_EXT_compiled_vertex_array
+[2024-05-07 19:34] Using GLSL rendering backend.
+[2024-05-07 19:34] ----------------------
+[2024-05-07 19:34] ------- S_Init -------
+[2024-05-07 19:34] OpenAL initialized.
+[2024-05-07 19:34] No Ogg Vorbis music tracks have been found, so there will be no music.
+[2024-05-07 19:34] ----------------------
+[2024-05-07 19:34] SDL mouse initialized.
+[2024-05-07 19:34] Loaded game library from C:\Program Files (x86)\Steam\steamapps\common\Quake II RTX\quakefall\gamex86_64.dll
+[2024-05-07 19:34] ==== InitGame ====
+[2024-05-07 19:34] ------- Server Initialization -------
+[2024-05-07 19:34] SpawnServer: quakefall
+[2024-05-07 19:34] 0 entities inhibited
+[2024-05-07 19:34] 0 teams with 0 entities
+[2024-05-07 19:34] G_PickTarget: target pc not found
+[2024-05-07 19:34] monster_soldier can't find target pc at (-216 64 -199)
+[2024-05-07 19:34] -------------------------------------
+[2024-05-07 19:34] ====== Quake II RTX initialized ======
+[2024-05-07 19:34] 
+[2024-05-07 19:34] Requesting connection... 1
+[2024-05-07 19:34] Connected to loopback (protocol 36).
+[2024-05-07 19:34] Triggering monsters
+[2024-05-07 19:34] Welcome to Quakefall! Take your time
+[2024-05-07 19:34] reading these help messages. Enemies won't spawn until you
+[2024-05-07 19:34] leave this room.
+[2024-05-07 19:34] Enemies spawn in waves. Kill them, and they might drop
+[2024-05-07 19:34] special upgrades for your guns!
+[2024-05-07 19:34] New guns have been added! The Wingman, Eva 8,
+[2024-05-07 19:34] R99, SMR, and Charge Rifle are the additions. Go pick
+[2024-05-07 19:34] them up in the next room!
+[2024-05-07 19:35] ==== ShutdownGame ====
+[2024-05-07 19:35] Shutting down OpenAL.
+[2024-05-07 19:35] Closing console log.
