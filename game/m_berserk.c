@@ -451,6 +451,9 @@ void SP_monster_berserk (edict_t *self)
 	self->monsterinfo.currentmove = &berserk_move_stand;
 	self->monsterinfo.scale = MODEL_SCALE;
 
+	//maybe add an item drop on death?
+	self->item = &itemlist[42];
+
 	gi.linkentity (self);
 
 	walkmonster_start (self);
