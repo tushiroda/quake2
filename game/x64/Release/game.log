@@ -1,5 +1,16 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  p_weapon.c
+  p_hud.c
+C:\Users\Tea\Documents\quake2\game\p_hud.c(126,37): warning C4311: 'type cast': pointer truncation from 'char **' to 'int'
+C:\Users\Tea\Documents\quake2\game\p_hud.c(129,38): warning C4311: 'type cast': pointer truncation from 'char **' to 'int'
+C:\Users\Tea\Documents\quake2\game\p_hud.c(131,39): warning C4311: 'type cast': pointer truncation from 'char **' to 'int'
+C:\Users\Tea\Documents\quake2\game\p_hud.c(138,38): warning C4311: 'type cast': pointer truncation from 'char **' to 'int'
+C:\Users\Tea\Documents\quake2\game\p_hud.c(140,39): warning C4311: 'type cast': pointer truncation from 'char **' to 'int'
+C:\Users\Tea\Documents\quake2\game\p_hud.c(205,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Tea\Documents\quake2\game\p_hud.c(231,8): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Tea\Documents\quake2\game\p_hud.c(234,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\game\p_hud.c(242,7): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Tea\Documents\quake2\game\p_hud.c(245,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Tea\Documents\quake2\game\p_hud.c(420,1): warning C4701: potentially uninitialized local variable 'cells' used
      Creating library .\..\release\gamex86.lib and object .\..\release\gamex86.exp
 LINK : warning LNK4281: undesirable base address 0x20000000 for x64 image; set base address above 4GB for best ASLR optimization
-  game.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\quake2\Quake II RTX\quakefall_but_worse\gamex86_64.dll
+  game.vcxproj -> C:\Program Files (x86)\Steam\steamapps\common\Quake II RTX\quakefall\gamex86_64.dll

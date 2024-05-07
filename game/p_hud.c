@@ -320,15 +320,12 @@ void HelpComputer (edict_t *ent)
 		"xv 0 yv 24 cstring2 \"%s\" "		// level name
 		"xv 0 yv 54 cstring2 \"%s\" "		// help 1
 		"xv 0 yv 110 cstring2 \"%s\" "		// help 2
-		"xv 50 yv 164 string2 \" kills     goals    secrets\" "
-		"xv 50 yv 172 string2 \"%3i/%3i     %i/%i       %i/%i\" ", 
+		"xv 50 yv 164 string2 \"  kill      them      all\" "
+		"xv 50 yv 172 string2 \"   :(        :)       >:)\" ", 
 		sk,
-		level.level_name,
-		game.helpmessage1,
-		game.helpmessage2,
-		level.killed_monsters, level.total_monsters, 
-		level.found_goals, level.total_goals,
-		level.found_secrets, level.total_secrets);
+		"Quakefall",
+		"If you haven't already, pull\nup the console and enter\n'gamemap quakefall'",
+		"Once in the game, take small\nsteps forward to read\nthe help messages");
 
 	gi.WriteByte (svc_layout);
 	gi.WriteString (string);

@@ -156,7 +156,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>gamex86_64</TargetName>
-    <OutDir>..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\quake2\Quake II RTX\quakefall_but_worse</OutDir>
+    <OutDir>..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Quake II RTX\quakefall</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Alpha|Win32'">
     <OutDir>.\..\ReleaseAXP\</OutDir>
