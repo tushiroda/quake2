@@ -223,6 +223,7 @@ qboolean Pickup_r99_hopup(edict_t* ent, edict_t* other)
 {
 	other->max_health += 2;
 	other->client->pers.max_bullets += 12;
+	other->client->pers.r99 += 1;
 
 	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
 		SetRespawn(ent, ent->item->quantity);
@@ -234,6 +235,7 @@ qboolean Pickup_eva_hopup(edict_t* ent, edict_t* other)
 {
 	other->max_health += 2;
 	other->client->pers.max_shells += 3;
+	other->client->pers.eva += 1;
 
 	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
 		SetRespawn(ent, ent->item->quantity);
@@ -244,7 +246,8 @@ qboolean Pickup_eva_hopup(edict_t* ent, edict_t* other)
 qboolean Pickup_SMR_hopup(edict_t* ent, edict_t* other)
 {
 	other->max_health += 2;
-	other->client->pers.max_rockets += 4;
+	other->client->pers.max_rockets += 3;
+	other->client->pers.smr += 1;
 
 	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
 		SetRespawn(ent, ent->item->quantity);

@@ -293,6 +293,7 @@ void fire_shotgun(edict_t* self, vec3_t start, vec3_t aimdir, int damage, int ki
 	vec3_t		base;
 	vec3_t		forward, right, up;
 
+	//now the shotgun shoots in a set spread, like the eva-8
 	if (self->client) {
 		AngleVectors(self->client->v_angle, forward, right, up);
 

@@ -621,12 +621,17 @@ void InitClientPersistant (gclient_t *client)
 
 	client->pers.max_bullets	= 36;
 	client->pers.max_shells		= 8;
-	client->pers.max_rockets	= 20;
+	client->pers.max_rockets	= 12;
 	client->pers.max_grenades	= 50;
 	client->pers.max_cells		= 200;
 	client->pers.max_slugs		= 1;
 
 	client->pers.connected = true;
+
+	//new vars to track hopups
+	client->pers.r99 = 0;
+	client->pers.smr = 0;
+	client->pers.eva = 0;
 }
 
 

@@ -852,6 +852,11 @@ typedef struct
 	int			max_cells;
 	int			max_slugs;
 
+	//quakefall NEW vars to keep track of hopups
+	int r99;
+	int smr;
+	int eva;
+
 	gitem_t		*weapon;
 	gitem_t		*lastweapon;
 
