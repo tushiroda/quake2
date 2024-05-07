@@ -211,6 +211,7 @@ qboolean Pickup_Adrenaline (edict_t *ent, edict_t *other)
 qboolean Pickup_AncientHead (edict_t *ent, edict_t *other)
 {
 	other->max_health += 2;
+	other->client->pers.max_bullets += 12;
 
 	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
 		SetRespawn (ent, ent->item->quantity);
@@ -1321,7 +1322,7 @@ always owned, never in the world
 		"models/weapons/g_shotg/tris.md2", EF_ROTATE,
 		"models/weapons/v_shotg/tris.md2",
 /* icon */		"w_shotgun",
-/* pickup */	"Shotgun",
+/* pickup */	"Eva-8",
 		0,
 		1,
 		"Shells",
@@ -1367,7 +1368,7 @@ always owned, never in the world
 		"models/weapons/g_machn/tris.md2", EF_ROTATE,
 		"models/weapons/v_machn/tris.md2",
 /* icon */		"w_machinegun",
-/* pickup */	"Machinegun",
+/* pickup */	"R-99",
 		0,
 		1,
 		"Bullets",
@@ -1505,7 +1506,7 @@ always owned, never in the world
 		"models/weapons/g_rail/tris.md2", EF_ROTATE,
 		"models/weapons/v_rail/tris.md2",
 /* icon */		"w_railgun",
-/* pickup */	"Railgun",
+/* pickup */	"Charge Rifle",
 		0,
 		1,
 		"Slugs",
@@ -2109,6 +2110,28 @@ tank commander's head
 		NULL,
 		0,
 /* precache */ "items/s_health.wav items/n_health.wav items/l_health.wav items/m_health.wav"
+	},
+
+	//special upgrades 42 index
+	{
+		"item_r99_mod",
+		Pickup_AncientHead,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/c_head/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"i_fixme",
+		/* pickup */	"R-99 Hopup",
+		/* width */		2,
+				60,
+				NULL,
+				0,
+				0,
+				NULL,
+				0,
+				/* precache */ ""
 	},
 
 	// end of list marker

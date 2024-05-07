@@ -480,7 +480,13 @@ void Weapon_Generic (edict_t *ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 					gi.sound(ent, CHAN_VOICE, gi.soundindex("weapons/noammo.wav"), 1, ATTN_NORM, 0);
 					ent->pain_debounce_time = level.time + 1;
 				}
-				NoAmmoWeaponChange (ent);
+				//scuffed reload
+				ent->client->pers.inventory[ent->client->ammo_index]--;
+				if (!ent->client->pers.inventory[ent->client->ammo_index]) {
+					ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_shells;
+				}
+				ent->client->newweapon = ent->client->pers.weapon;
+				ChangeWeapon(ent);
 			}
 		}
 		else
@@ -764,8 +770,8 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 	float	damage_radius;
 	int		radius_damage;
 
-	damage = 100 + (int)(random() * 20.0);
-	radius_damage = 120;
+	damage = 30 + (int)(random() * 20.0);
+	radius_damage = 30;
 	damage_radius = 120;
 	if (is_quad)
 	{
@@ -794,14 +800,21 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
+
+	//trying rocket reload, twice just for timing
+	if (!ent->client->pers.inventory[ent->client->ammo_index]) {
+		ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_rockets;
+		ent->client->newweapon = ent->client->pers.weapon;
+		ChangeWeapon(ent);
+	}
 }
 
 void Weapon_RocketLauncher (edict_t *ent)
 {
-	static int	pause_frames[]	= {25, 33, 42, 50, 0};
-	static int	fire_frames[]	= {5, 0};
+	static int	pause_frames[]	= {0};
+	static int	fire_frames[]	= {2, 0};
 
-	Weapon_Generic (ent, 4, 12, 50, 54, pause_frames, fire_frames, Weapon_RocketLauncher_Fire);
+	Weapon_Generic (ent, 1, 2, 3, 4, pause_frames, fire_frames, Weapon_RocketLauncher_Fire);
 }
 
 
@@ -829,9 +842,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_blaster(ent, start, forward, 150, 1000, effect, hyper);
-	fire_blaster(ent, start, forward, 150, 1500, effect, hyper);
-	fire_blaster(ent, start, forward, 150, 2000, effect, hyper);
+	fire_blaster(ent, start, forward, 20, 1500, effect, hyper);
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
@@ -854,7 +865,7 @@ void Weapon_Blaster_Fire (edict_t *ent)
 		damage = 15;
 	else
 		damage = 10;
-	Blaster_Fire (ent, vec3_origin, damage, false, EF_BLASTER);
+	Blaster_Fire (ent, vec3_origin, damage, false, EF_HYPERBLASTER);
 	ent->client->ps.gunframe++;
 }
 
@@ -959,8 +970,8 @@ void Machinegun_Fire (edict_t *ent)
 	vec3_t		start;
 	vec3_t		forward, right;
 	vec3_t		angles;
-	int			damage = 8;
-	int			kick = 2;
+	int			damage = 12;
+	int			kick = 1;
 	vec3_t		offset;
 
 	if (!(ent->client->buttons & BUTTON_ATTACK))
@@ -983,7 +994,11 @@ void Machinegun_Fire (edict_t *ent)
 			gi.sound(ent, CHAN_VOICE, gi.soundindex("weapons/noammo.wav"), 1, ATTN_NORM, 0);
 			ent->pain_debounce_time = level.time + 1;
 		}
-		NoAmmoWeaponChange (ent);
+
+		//scuffed reload
+		ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_bullets;
+		ent->client->newweapon = ent->client->pers.weapon;
+		ChangeWeapon(ent);
 		return;
 	}
 
@@ -995,8 +1010,8 @@ void Machinegun_Fire (edict_t *ent)
 
 	for (i=1 ; i<3 ; i++)
 	{
-		ent->client->kick_origin[i] = crandom() * 0.35;
-		ent->client->kick_angles[i] = crandom() * 0.7;
+		ent->client->kick_origin[i] = crandom() * 0.15;
+		ent->client->kick_angles[i] = crandom() * 0.5;
 	}
 	ent->client->kick_origin[0] = crandom() * 0.35;
 	ent->client->kick_angles[0] = ent->client->machinegun_shots * -1.5;
@@ -1014,7 +1029,7 @@ void Machinegun_Fire (edict_t *ent)
 	AngleVectors (angles, forward, right, NULL);
 	VectorSet(offset, 0, 0, ent->viewheight);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
-	fire_bullet (ent, start, forward, damage, 0, 0, 0, MOD_MACHINEGUN);
+	fire_blaster(ent, start, forward, damage, 1500, 1, true);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -1189,7 +1204,7 @@ void weapon_shotgun_fire (edict_t *ent)
 	vec3_t		start;
 	vec3_t		forward, right;
 	vec3_t		offset;
-	int			damage = 4;
+	int			damage = 8;
 	int			kick = 0;
 
 	if (ent->client->ps.gunframe == 9)
@@ -1227,15 +1242,22 @@ void weapon_shotgun_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index];
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+
+	//scuffed shotgun reload
+	if (!ent->client->pers.inventory[ent->client->ammo_index]) {
+		ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_shells;
+		ent->client->newweapon = ent->client->pers.weapon;
+		ChangeWeapon(ent);
+	}
 }
 
 void Weapon_Shotgun (edict_t *ent)
 {
-	static int	pause_frames[]	= {22, 28, 34, 0};
-	static int	fire_frames[]	= {8, 9, 0};
+	static int	pause_frames[]	= {10, 0};
+	static int	fire_frames[]	= {3, 0};
 
-	Weapon_Generic (ent, 7, 18, 36, 39, pause_frames, fire_frames, weapon_shotgun_fire);
+	Weapon_Generic (ent, 1, 3, 8, 11, pause_frames, fire_frames, weapon_shotgun_fire);
 }
 
 
@@ -1352,10 +1374,10 @@ void weapon_railgun_fire (edict_t *ent)
 
 void Weapon_Railgun (edict_t *ent)
 {
-	static int	pause_frames[]	= {56, 0};
-	static int	fire_frames[]	= {4, 0};
+	static int	pause_frames[]	= {30, 0};
+	static int	fire_frames[]	= {15, 0};
 
-	Weapon_Generic (ent, 3, 18, 56, 61, pause_frames, fire_frames, weapon_railgun_fire);
+	Weapon_Generic (ent, 3, 15, 30, 32, pause_frames, fire_frames, weapon_railgun_fire);
 }
 
 
