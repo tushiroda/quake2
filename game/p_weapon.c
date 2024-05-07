@@ -480,13 +480,7 @@ void Weapon_Generic (edict_t *ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 					gi.sound(ent, CHAN_VOICE, gi.soundindex("weapons/noammo.wav"), 1, ATTN_NORM, 0);
 					ent->pain_debounce_time = level.time + 1;
 				}
-				//scuffed reload
 				ent->client->pers.inventory[ent->client->ammo_index]--;
-				if (!ent->client->pers.inventory[ent->client->ammo_index]) {
-					ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_shells;
-				}
-				ent->client->newweapon = ent->client->pers.weapon;
-				ChangeWeapon(ent);
 			}
 		}
 		else
@@ -801,9 +795,11 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
 
-	//trying rocket reload, twice just for timing
+	//scuffed rocket reload, twice just for timing
 	if (!ent->client->pers.inventory[ent->client->ammo_index]) {
 		ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_rockets;
+		ent->client->newweapon = ent->client->pers.weapon;
+		ChangeWeapon(ent);
 		ent->client->newweapon = ent->client->pers.weapon;
 		ChangeWeapon(ent);
 	}
@@ -842,7 +838,7 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_blaster(ent, start, forward, 20, 1500, effect, hyper);
+	fire_blaster(ent, start, forward, 35, 1500, effect, hyper);
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
@@ -995,7 +991,7 @@ void Machinegun_Fire (edict_t *ent)
 			ent->pain_debounce_time = level.time + 1;
 		}
 
-		//scuffed reload
+		//scuffed machinegun reload
 		ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_bullets;
 		ent->client->newweapon = ent->client->pers.weapon;
 		ChangeWeapon(ent);
@@ -1029,7 +1025,7 @@ void Machinegun_Fire (edict_t *ent)
 	AngleVectors (angles, forward, right, NULL);
 	VectorSet(offset, 0, 0, ent->viewheight);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
-	fire_blaster(ent, start, forward, damage, 1500, 1, true);
+	fire_blaster(ent, start, forward, damage, 1500, 0, true);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -1368,7 +1364,14 @@ void weapon_railgun_fire (edict_t *ent)
 	PlayerNoise(ent, start, PNOISE_WEAPON);
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
-		ent->client->pers.inventory[ent->client->ammo_index];
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+
+	//scuffed railgun reload
+	if (!ent->client->pers.inventory[ent->client->ammo_index]) {
+		ent->client->pers.inventory[ent->client->ammo_index] = ent->client->pers.max_slugs;
+		ent->client->newweapon = ent->client->pers.weapon;
+		ChangeWeapon(ent);
+	}
 }
 
 

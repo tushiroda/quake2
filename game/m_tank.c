@@ -849,6 +849,10 @@ void SP_monster_tank (edict_t *self)
 	self->monsterinfo.currentmove = &tank_move_stand;
 	self->monsterinfo.scale = MODEL_SCALE;
 
+	//maybe add an item drop on death?
+	int temp = rand() % 3;
+	self->item = &itemlist[42 + temp];
+
 	walkmonster_start(self);
 
 	if (strcmp(self->classname, "monster_tank_commander") == 0)

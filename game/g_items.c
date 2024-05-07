@@ -219,6 +219,39 @@ qboolean Pickup_AncientHead (edict_t *ent, edict_t *other)
 	return true;
 }
 
+qboolean Pickup_r99_hopup(edict_t* ent, edict_t* other)
+{
+	other->max_health += 2;
+	other->client->pers.max_bullets += 12;
+
+	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
+		SetRespawn(ent, ent->item->quantity);
+
+	return true;
+}
+
+qboolean Pickup_eva_hopup(edict_t* ent, edict_t* other)
+{
+	other->max_health += 2;
+	other->client->pers.max_shells += 3;
+
+	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
+		SetRespawn(ent, ent->item->quantity);
+
+	return true;
+}
+
+qboolean Pickup_SMR_hopup(edict_t* ent, edict_t* other)
+{
+	other->max_health += 2;
+	other->client->pers.max_rockets += 4;
+
+	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
+		SetRespawn(ent, ent->item->quantity);
+
+	return true;
+}
+
 qboolean Pickup_Bandolier (edict_t *ent, edict_t *other)
 {
 	gitem_t	*item;
@@ -1460,7 +1493,7 @@ always owned, never in the world
 		"models/weapons/g_rocket/tris.md2", EF_ROTATE,
 		"models/weapons/v_rocket/tris.md2",
 /* icon */		"w_rlauncher",
-/* pickup */	"Rocket Launcher",
+/* pickup */	"SMR",
 		0,
 		1,
 		"Rockets",
@@ -2115,7 +2148,7 @@ tank commander's head
 	//special upgrades 42 index
 	{
 		"item_r99_mod",
-		Pickup_AncientHead,
+		Pickup_r99_hopup,
 		NULL,
 		NULL,
 		NULL,
@@ -2126,7 +2159,47 @@ tank commander's head
 		/* pickup */	"R-99 Hopup",
 		/* width */		2,
 				60,
+				42,
+				0,
+				0,
 				NULL,
+				0,
+				/* precache */ ""
+	},
+	{
+		"item_eva_mod",
+		Pickup_eva_hopup,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/c_head/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"i_fixme",
+		/* pickup */	"Eva-8 Hopup",
+		/* width */		2,
+				60,
+				43,
+				0,
+				0,
+				NULL,
+				0,
+				/* precache */ ""
+	},
+	{
+		"item_SMR_mod",
+		Pickup_SMR_hopup,
+		NULL,
+		NULL,
+		NULL,
+		"items/pkup.wav",
+		"models/items/c_head/tris.md2", EF_ROTATE,
+		NULL,
+		/* icon */		"i_fixme",
+		/* pickup */	"SMR Hopup",
+		/* width */		2,
+				60,
+				44,
 				0,
 				0,
 				NULL,

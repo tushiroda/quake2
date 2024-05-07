@@ -452,7 +452,8 @@ void SP_monster_berserk (edict_t *self)
 	self->monsterinfo.scale = MODEL_SCALE;
 
 	//maybe add an item drop on death?
-	self->item = &itemlist[42];
+	int temp = rand() % 3;
+	self->item = &itemlist[42 + temp];
 
 	gi.linkentity (self);
 
